@@ -1,9 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
-
 # Files
-
 # Compiled source #
 ###################
 *.com
@@ -17,20 +15,17 @@
 *.R~
 *.synctex.gz
 *.sty~
-
 # Certain little files
 ###########
-
 *.pdf       # We put these things in folders linked with dropbox via sync files.
 *.csv
 *.RData
 *.png
 *.jpg
-
 # Packages #
 ############
-  # it's better to unpack these files and commit the raw source
-  # git has its own built in compression methods
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
 *.7z
 *.dmg
 *.gz
@@ -55,3 +50,5 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+On_Poisson_modelling.pdf
+Nikotynizm.pdf
