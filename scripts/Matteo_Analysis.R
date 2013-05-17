@@ -1,29 +1,38 @@
-	### Data Manipulation and Modelling
-	### Mateusz ????cki
-	
-Names_of_Variables_Polish	<- colnames(Dane)
-No_of_Variables			<- length( colnames(Dane) )
+setwd("~/Documents/Scienza/Data_Mining/R_and_SAS/Progetto_V/")
+
+load("data/Data.RData")
+ls()
+
+variables <- colnames(Data)
+summary(Data)
+head(Data$Smokes)
+
+is.ordered(Data$Smokes)
+
+is.ordered(Data$Daily_Smokes)
+is.ordered(Data$Ever_Smoked)
+is.ordered(Data$Psychatric)
+is.ordered(Data$Alcohol)
+is.ordered(Data$Drugs)
+is.ordered(Data$Criminal)
+is.ordered(Data$Marital_Status)
+
+is.ordered(Data$Age)
+is.ordered(Data$Age_Group)
+is.ordered(Data$Employment)
+is.ordered(Data$Gender)
+is.ordered(Data$Smoker_Group)
+head(Data$Smoker_Group)
+
+dataForModelling 	<- Data[, setdiff( variables, c("Smokes", "Ever_Smoked", "Age_Group", "Smoker_Group"))]
+
+summary(dataForModelling)
+
+Poisson_Model 		<- glm( Daily_Smokes ~ ., data=dataForModelling, family=poisson)
+Poisson_Big_Summary 	<- summary( Poisson_Model )
+Poisson_Big_Summary
 
 
-	### Translating column names into English.
-
-Data 				<- Dane
-colnames(Data) 			<- DICTIONARY_POLISH_ENGLISH(colnames(Dane))
-Names_of_Variables_English 	<- colnames(Data)
-Data_for_Modelling		<- Data[,-1] 	### We get rid of the do-you-smoke question. 
-
-	# Resetting the factors
-	
-levels(Data$Education) <- c("bez wyksztalcenia","podstawowe ukonczone", "policealne", "srednie ogolnoksztalcace","srednie zawodowe","wyzsze ze stopniem inzyniera, licencjata","wyzsze ze stopniem magistra lub rownorzednym","wyzsze ze stopniem naukowym co najmniej doktora","zasadnicze zawodowe")
-
-	# Translation of tuples - it's not vectorised, but I lost about 5 hours trying to do it
-	
-for( i in 1:length(colnames(Data)))
-{
-	levels(Data[,i]) 	<- as.vector(sapply(levels(Data[,i]), DICTIONARY_POLISH_ENGLISH))
-}
-	
-rm(i)	
 
 
 	# Black-and-white histograms created for all possible variables
