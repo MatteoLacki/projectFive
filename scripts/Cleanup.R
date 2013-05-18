@@ -67,11 +67,15 @@ fixLevels <- function(lvls, d=NULL, var=NULL, order=NULL, skip=0) {
       levels(d1[,var1]) <- c(levels(d1[,var1])[1:skip],lvls)
     } else {
       levels(d1[,var1]) <- lvls
-    }          
-    if (is.null(order)) { order <- 1:length(lvls) }
+    }  
+    o <- T
+    if (is.null(order)) { 
+      o <- F
+      order <- 1:length(lvls) 
+    } else if (order == F) { o <- F }
     d1[,var1] <- factor(d1[,var1], 
                         levels = sapply(order, function(x) { lvls[x] }), 
-                        ordered = T)
+                        ordered = o)
     d1
   }
   if (is.null(d)) { 
@@ -92,11 +96,11 @@ fixLevels <- function(lvls, d=NULL, var=NULL, order=NULL, skip=0) {
 Data <- fixLevels(c("yes","no"), Data, c("Smokes", "Ever_Smoked","Psychiatric", "Drugs", "Criminal", "Alcohol"),skip=1)
 Data$Daily_Smokes[is.na(Data$Daily_Smokes)] <- 0
 Data <- fixLevels(c("single","married","widowed","divorced","separated","unknown"), Data, "Marital_Status",skip=2)
-Data <- fixLevels(c("0-24","25-34","35-44","45-59","60-64","65+"),Data, "Age_Group",skip=1)
+Data <- fixLevels(c("0-24","25-34","35-44","45-59","60-64","65+"),Data, "Age_Group",skip=1, order=T)
 Data <- fixLevels(c("civil servant", "private sector", "entrepreneur", 
                     "farmer", "pensioner","retiree", "pupil or student", 
                     "unemployed", "other non-active"), Data, "Employment", skip=1)
-Data <- fixLevels(c("primary or less", "technical", "secondary", "beyond secondary"), Data, "Education", skip=1)
+Data <- fixLevels(c("primary or less", "technical", "secondary", "beyond secondary"), Data, "Education", skip=1, order=T)
 Data <- fixLevels(c("male","female"),Data,"Gender", skip=1)
 
 smokerLevels <- c('never smoked', 'former smoker', 'up to half a pack', 'up to one pack', 'more than one pack')
