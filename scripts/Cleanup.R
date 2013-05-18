@@ -1,10 +1,12 @@
 load("data/diagnozaOsoby2011.RData")
 
-variablesOriginalNames  <- c("ap83_1", "ap83_2", "ap83_3", "ap84", "ap85", "ap86", "ap100", "ac8",
-                             "wiek2011", "wiek6_2011", "status9_2011", "eduk4_2011", "PLEC", "bp107")
+variablesOriginalNamesYear2000  <- c("ap83_1", "ap83_2", "ap83_3", "ap84", "ap85", "ap86", "ap100", "ac8",
+                             "wiek2000", "wiek6_2000", "status9_2000", "eduk4_2000", "PLEC", "bp107")  # We cannot take bp107 - these results are not from year 2000.
+
+variablesOriginalNamesYear2011	<- c("fp44", "fp45", "fp46", "fp72", "fp73", "fp74", "fp88", "fC11", "wiek2011", "wiek6_2011", "status9_2011", "eduk4_2011", "PLEC", "fp65")
 
 
-variablesDescriptionPolish  <- c( "Czy pali papierosy", 
+variablesDescriptionPolish2000  <- c( "Czy pali papierosy", 
                                   "Ile przecietnie papierosow dziennie wypala", 
                                   "Czy kiedykolwiek palil papierosy",
                                   "Korzystalem z porad psychologa (psychiatry)",
@@ -18,6 +20,22 @@ variablesDescriptionPolish  <- c( "Czy pali papierosy",
                                   "Poziom wyksztalcenia",
                                   "Plec",
                                   "Dochod miesieczny",
+                                  "Kategorie palaczy")
+
+variablesDescriptionPolish2011  <- c( "Czy pali papierosy", 
+                                  "Ile przecietnie papierosow dziennie wypala", 
+                                  "Czy kiedykolwiek palil papierosy",
+                                  "Korzystalem z porad psychologa (psychiatry)",
+                                  "Pilem za duzo alkoholu",
+                                  "Probowalem narkotykow/dopalaczy",    
+                                  "Zostalem oskarzony w sprawie cywilnej",
+                                  "Stan cywilny",
+                                  "Wiek",
+                                  "Kategoria wiekowa", 
+                                  "Grupa zawodowa", 
+                                  "Poziom wyksztalcenia",
+                                  "Plec",
+                                  "Osobisty dochod miesieczny netto - srednia z ostatnich trzech miesiecy",
                                   "Kategorie palaczy")
 
 variablesDescriptionEnglish <- c( "smokes", 
@@ -53,7 +71,8 @@ variablesNames <- c("Smokes",
                     "Income",
                     "Smoker_Group")
 
-Data <- diagnozaOsoby2011[,variablesOriginalNames]
+Data <- diagnozaOsoby2011[,variablesOriginalNamesYear2011]
+
 colnames(Data) <- variablesNames[1:14]
 
 temp <- data.frame(ifelse(is.na(Data[c(1:7,11,12,14)]), T, NA))
@@ -114,4 +133,4 @@ Data[,"Smoker_Group"] <- factor(ifelse(Data$Smokes == "no" & Data$Ever_Smoked ==
                              
 attach(Data)
 
-# save(Data, file="data/Data.RData")
+save(Data, file="data/Data.RData")

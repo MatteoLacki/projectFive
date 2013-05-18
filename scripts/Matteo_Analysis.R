@@ -6,44 +6,23 @@ ls()
 variables 		<- colnames(Data)		
 variablesForModelling 	<- setdiff( variables, c("Smokes", "Ever_Smoked", "Age_Group", "Smoker_Group"))
 
+summary(Data$Ever_Smoked)
+summary(Data$Smokes)
+
 summary(Data)
-head(Data$Smokes)
 
-is.ordered(Data$Smokes)
-
-is.ordered(Data$Daily_Smokes)
-is.ordered(Data$Ever_Smoked)
-is.ordered(Data$Psychatric)
-is.ordered(Data$Alcohol)
-is.ordered(Data$Drugs)
-is.ordered(Data$Criminal)
-is.ordered(Data$Marital_Status)
-
-is.ordered(Data$Age)
-is.ordered(Data$Age_Group)
-is.ordered(Data$Employment)
-is.ordered(Data$Gender)
-is.ordered(Data$Smoker_Group)
-head(Data$Smoker_Group)
+	for (i in 1:length(variables)) 
+	{
+		cat(variables[i], "\n")
+		print(head( eval(parse(text=paste("Data$", variables[i]))) ))
+	}
+	rm(i)
 
 dataForModelling 	<- Data[, variablesForModelling]
 
 attach(dataForModelling)
-
-is.ordered(Employment)
-dataForModelling$Employment <- factor(unclass(Employment)) 
-levels(dataForModelling$Employment) <- c("civil servant", "private sector", "entrepreneur", 
-                    "farmer", "pensioner","retiree", "pupil or student", 
-                    "unemployed", "other non-active")
-
-head(Data$Employment)
-head(dataForModelling$Employment)
-
 summary(dataForModelling)
 
-Poisson_Model 		<- glm( Daily_Smokes ~ ., data=dataForModelling, family=poisson, contrasts = contrastsTest)
-
-variablesForModelling
 
 
 			# What is that? Contrasts.. Take a look here
@@ -79,6 +58,13 @@ PoissonProbabilityFunction <- function( countedThing, regressants, coefficients 
 }
 
 
+qplot(  , 
+	data = Dane, 
+	geom="histogram", 
+	ylab="No of people", 
+	xlab=gsub("_", " ", x)
+)
+
 
 Poisson_Big_Summary 	<- summary( Poisson_Model )
 Poisson_Big_Summary
@@ -89,21 +75,35 @@ modelCoefficients 	<- Poisson_Big_Summary$coefficients[,1]
 z <- list(a = "agg")
 z$a
 	# Black-and-white histograms created for all possible variables
+library(ggplot2)
 
 Not_Filled_Histograms <- 
 	lapply(
-		Names_of_Variables_Polish, 
+		variables,
 		function(x)
 		{ 
 			qplot( 
 				eval(parse(text = x)), 
-				data = Dane, 
+				data = Data, 
 				geom="histogram", 
 				ylab="No of people", 
 				xlab=gsub("_", " ", x)
-			) + coord_flip()
+			) 
 		}	
 	)
+names(Not_Filled_Histograms) <- variables
+variables
+
+Not_Filled_Histograms$Daily_Smokes
+
+
+
+
+
+
+
+
+
 
 
 	# Making all different histograms that are filled with third variable.
