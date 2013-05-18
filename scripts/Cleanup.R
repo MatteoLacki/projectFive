@@ -124,11 +124,20 @@ Data <- fixLevels(c("male","female"),Data,"Gender", skip=1)
 
 smokerLevels <- c('never smoked', 'former smoker', 'up to half a pack', 'up to one pack', 'more than one pack')
 
+#head(Data$Ever_Smoked)
+#class(Data$Ever_Smoked[2]) 
+#is.na(Data$Ever_Smoked)
+
+
+#summary(Data[ !is.na(Data$Smokes)  , ])
+
+
+  # We modify a bit the grouping to include more data with NA, because people tend to omit responding two times to similar questions.
 Data[,"Smoker_Group"] <- factor(ifelse(Data$Smokes == "no" & Data$Ever_Smoked == "no", smokerLevels[1],
                                  ifelse(Data$Smokes == "no" & Data$Ever_Smoked == "yes", smokerLevels[2],
-                                  ifelse(Data$Smokes == "yes" & Data$Daily_Smokes <= 10, smokerLevels[3],
-                                   ifelse(Data$Smokes == "yes" & Data$Daily_Smokes > 10  &Data$Daily_Smokes <= 20, smokerLevels[4],
-                                          smokerLevels[5])))), 
+                                    ifelse(Data$Smokes == "yes" & Data$Daily_Smokes <= 10, smokerLevels[3],
+                                     ifelse(Data$Smokes == "yes" & Data$Daily_Smokes > 10  &Data$Daily_Smokes <= 20, smokerLevels[4],
+                                            smokerLevels[5])))), 
                                 levels = smokerLevels, ordered = T)
                              
 attach(Data)

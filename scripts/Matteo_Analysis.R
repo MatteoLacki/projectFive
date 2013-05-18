@@ -1,4 +1,4 @@
-setwd("~/Documents/Scienza/Data_Mining/R_and_SAS/Progetto_V/")
+#setwd("~/Documents/Scienza/Data_Mining/R_and_SAS/Progetto_V/")
 
 load("data/Data.RData")
 ls()
