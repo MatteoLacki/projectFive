@@ -5,6 +5,8 @@ ls()
 
 variables 		<- colnames(Data)		
 variablesForModelling 	<- setdiff( variables, c("Smokes", "Ever_Smoked", "Age_Group", "Smoker_Group"))
+variables
+
 
 summary(Data$Ever_Smoked)
 summary(Data$Smokes)

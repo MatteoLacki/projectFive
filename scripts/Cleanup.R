@@ -73,7 +73,17 @@ variablesNames <- c("Smokes",
 
 Data <- diagnozaOsoby2011[,variablesOriginalNamesYear2011]
 
+rm(	diagnozaOsoby2011, 
+	variablesOriginalNamesYear2000, 
+	variablesOriginalNamesYear2011,
+	variablesDescriptionPolish2000,
+	variablesDescriptionPolish2011,
+	variablesDescriptionEnglish)
+
 colnames(Data) <- variablesNames[1:14]
+
+	# usuwa te wiersze, w których wszystkie istotne kolumny są NA
+	# Przygotowuje data.frame wypełniony TRUE i NA. 
 
 temp <- data.frame(ifelse(is.na(Data[c(1:7,11,12,14)]), T, NA))
 temp[,'indeks'] = 1:nrow(Data)
@@ -113,7 +123,12 @@ fixLevels <- function(lvls, d=NULL, var=NULL, order=NULL, skip=0) {
 }
 
 Data <- fixLevels(c("yes","no"), Data, c("Smokes", "Ever_Smoked","Psychiatric", "Drugs", "Criminal", "Alcohol"),skip=1)
-Data$Daily_Smokes[is.na(Data$Daily_Smokes)] <- 0
+
+#Data$Daily_Smokes[is.na(Data$Daily_Smokes)] <- -1
+#Data$Daily_Smokes[is.na(Data$Daily_Smokes)] <- 0	# To chyba zbyt słabe.
+
+
+
 Data <- fixLevels(c("single","married","widowed","divorced","separated","unknown"), Data, "Marital_Status",skip=2)
 Data <- fixLevels(c("0-24","25-34","35-44","45-59","60-64","65+"),Data, "Age_Group",skip=1, order=T)
 Data <- fixLevels(c("civil servant", "private sector", "entrepreneur", 
@@ -122,24 +137,21 @@ Data <- fixLevels(c("civil servant", "private sector", "entrepreneur",
 Data <- fixLevels(c("primary or less", "technical", "secondary", "beyond secondary"), Data, "Education", skip=1, order=T)
 Data <- fixLevels(c("male","female"),Data,"Gender", skip=1)
 
+rm(fixLevels)
+###########################################################################################################
+	# Removing inconsistencies and making small repairs. Works for any data set - we can change years as well.
+source("./scripts/inputControl.R")
+###########################################################################################################
 smokerLevels <- c('never smoked', 'former smoker', 'up to half a pack', 'up to one pack', 'more than one pack')
 
-#head(Data$Ever_Smoked)
-#class(Data$Ever_Smoked[2]) 
-#is.na(Data$Ever_Smoked)
 
 
-#summary(Data[ !is.na(Data$Smokes)  , ])
-
-
-  # We modify a bit the grouping to include more data with NA, because people tend to omit responding two times to similar questions.
 Data[,"Smoker_Group"] <- factor(ifelse(Data$Smokes == "no" & Data$Ever_Smoked == "no", smokerLevels[1],
                                  ifelse(Data$Smokes == "no" & Data$Ever_Smoked == "yes", smokerLevels[2],
                                     ifelse(Data$Smokes == "yes" & Data$Daily_Smokes <= 10, smokerLevels[3],
                                      ifelse(Data$Smokes == "yes" & Data$Daily_Smokes > 10  &Data$Daily_Smokes <= 20, smokerLevels[4],
                                             smokerLevels[5])))), 
                                 levels = smokerLevels, ordered = T)
-                             
-attach(Data)
+###########################################################################################################                          
 
-save(Data, file="data/Data.RData")
+#save(Data, file="data/Data.RData")
