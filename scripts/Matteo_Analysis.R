@@ -7,9 +7,11 @@ variables 		<- colnames(Data)
 variablesForModelling 	<- setdiff( variables, c("Smokes", "Ever_Smoked", "Age_Group", "Smoker_Group"))
 
 dataForModelling 	<- Data[, variablesForModelling]
+summary(dataForModelling)
+
 rm(Data)
 
-attach(dataForModelling)
+#attach(dataForModelling)
 summary(dataForModelling)
 
 
@@ -26,7 +28,8 @@ contrasts <- 	list(Psychiatric= 	"contr.treatment",
 			Criminal= 	"contr.treatment",
 			Marital_Status= "contr.treatment",
 			Employment= 	"contr.treatment",	
-			Education= 	"contr.helmert",	
+			#Education= 	"contr.helmert",
+			Education= 	"contr.treatment",	
 			Gender= 	"contr.treatment" )
 
 Poisson_Model 		<- glm( formula	= formula, 
@@ -47,20 +50,11 @@ PoissonProbabilityFunction <- function( countedThing, regressants, coefficients 
 }
 
 
-
-qplot(  , 
-	data = Dane, 
-	geom="histogram", 
-	ylab="No of people", 
-	xlab=gsub("_", " ", x)
-)
-
-
 Poisson_Big_Summary 	<- summary( Poisson_Model )
 Poisson_Big_Summary
 
 modelCoefficients 	<- Poisson_Big_Summary$coefficients[,1]
-
+modelCoefficients
 	
 z <- list(a = "agg")
 z$a
