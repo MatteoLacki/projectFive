@@ -1,26 +1,13 @@
 #setwd("~/Documents/Scienza/Data_Mining/R_and_SAS/Progetto_V/")
 
 load("data/Data.RData")
-ls()
+summary(Data)
 
 variables 		<- colnames(Data)		
 variablesForModelling 	<- setdiff( variables, c("Smokes", "Ever_Smoked", "Age_Group", "Smoker_Group"))
-variables
-
-
-summary(Data$Ever_Smoked)
-summary(Data$Smokes)
-
-summary(Data)
-
-	for (i in 1:length(variables)) 
-	{
-		cat(variables[i], "\n")
-		print(head( eval(parse(text=paste("Data$", variables[i]))) ))
-	}
-	rm(i)
 
 dataForModelling 	<- Data[, variablesForModelling]
+rm(Data)
 
 attach(dataForModelling)
 summary(dataForModelling)
@@ -58,6 +45,7 @@ PoissonProbabilityFunction <- function( countedThing, regressants, coefficients 
 		return( exp( - lamda + countedThing*log(lambda) - sum(log(1:countedThing)) ) )
 	} 
 }
+
 
 
 qplot(  , 
@@ -102,8 +90,8 @@ Not_Filled_Histograms$Daily_Smokes
 
 
 
-
-
+datach(dataForModelling)
+rm(contrasts, dataForModelling, variables, variablesForModelling)
 
 
 
@@ -124,6 +112,8 @@ Poisson_Summary		<- cbind(Poisson_Summary, Relative_Binary_Change)
 
 rm( Relative_Binary_Change )
 rm( Poisson_Model )
+
+
 
 # Make it nice.. and add another type of model.
 	

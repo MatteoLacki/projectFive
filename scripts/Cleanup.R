@@ -152,6 +152,8 @@ Data[,"Smoker_Group"] <- factor(ifelse(Data$Smokes == "no" & Data$Ever_Smoked ==
                                      ifelse(Data$Smokes == "yes" & Data$Daily_Smokes > 10  &Data$Daily_Smokes <= 20, smokerLevels[4],
                                             smokerLevels[5])))), 
                                 levels = smokerLevels, ordered = T)
+
+rm(smokerLevels)
 ###########################################################################################################                          
 
 #save(Data, file="data/Data.RData")
