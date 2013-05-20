@@ -8,7 +8,7 @@ names <- c("Smokes",
            "Marital_Status",
            "Age",
            "Income"
-)
+) 
 
 # read data from Cleanup.r and clean
 hdata <- Data[,names]
