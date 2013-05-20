@@ -1,28 +1,17 @@
 #setwd("~/Documents/Scienza/Data_Mining/R_and_SAS/Progetto_V/")
 
 load("data/Data.RData")
-ls()
+summary(Data)
 
 variables 		<- colnames(Data)		
 variablesForModelling 	<- setdiff( variables, c("Smokes", "Ever_Smoked", "Age_Group", "Smoker_Group"))
-variables
-
-
-summary(Data$Ever_Smoked)
-summary(Data$Smokes)
-
-summary(Data)
-
-	for (i in 1:length(variables)) 
-	{
-		cat(variables[i], "\n")
-		print(head( eval(parse(text=paste("Data$", variables[i]))) ))
-	}
-	rm(i)
 
 dataForModelling 	<- Data[, variablesForModelling]
+summary(dataForModelling)
 
-attach(dataForModelling)
+rm(Data)
+
+#attach(dataForModelling)
 summary(dataForModelling)
 
 
@@ -39,7 +28,8 @@ contrasts <- 	list(Psychiatric= 	"contr.treatment",
 			Criminal= 	"contr.treatment",
 			Marital_Status= "contr.treatment",
 			Employment= 	"contr.treatment",	
-			Education= 	"contr.helmert",	
+			#Education= 	"contr.helmert",
+			Education= 	"contr.treatment",	
 			Gender= 	"contr.treatment" )
 
 Poisson_Model 		<- glm( formula	= formula, 
@@ -60,19 +50,11 @@ PoissonProbabilityFunction <- function( countedThing, regressants, coefficients 
 }
 
 
-qplot(  , 
-	data = Dane, 
-	geom="histogram", 
-	ylab="No of people", 
-	xlab=gsub("_", " ", x)
-)
-
-
 Poisson_Big_Summary 	<- summary( Poisson_Model )
 Poisson_Big_Summary
 
 modelCoefficients 	<- Poisson_Big_Summary$coefficients[,1]
-
+modelCoefficients
 	
 z <- list(a = "agg")
 z$a
@@ -102,8 +84,8 @@ Not_Filled_Histograms$Daily_Smokes
 
 
 
-
-
+datach(dataForModelling)
+rm(contrasts, dataForModelling, variables, variablesForModelling)
 
 
 
@@ -124,6 +106,8 @@ Poisson_Summary		<- cbind(Poisson_Summary, Relative_Binary_Change)
 
 rm( Relative_Binary_Change )
 rm( Poisson_Model )
+
+
 
 # Make it nice.. and add another type of model.
 	
