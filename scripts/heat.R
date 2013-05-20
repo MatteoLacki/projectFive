@@ -36,8 +36,8 @@ hdata2 = ddply(hdata, ~ Marital_Status ~ Age < 40,
                meanIncome = mean(Income, na.rm=TRUE), 
                meanIncomeSmokers = 
                  mean(mapply(incomeSmokerOrNA, Income, Smokes), na.rm=TRUE), 
-               Smokers = sum(Smokes == 'yes')/length(Smokes), 
-               NumberOfCiggarets = 
+               smokers = sum(Smokes == 'yes')/length(Smokes), 
+               numberOfCiggarets = 
                   sum(Daily_Smokes)/length(Smokes))
          )
 
@@ -47,9 +47,10 @@ hdata2[,1] <- NULL
 hdata2[,1] <- NULL
 
 
+
 #create heatmap
 xh <- as.matrix(hdata2)
-heatmap(t(-xh), Rowv = NA, Colv = NA, scale = "row", 
+heatmap(t(-xh), Rowv = NA, Colv = NA, scale = "row", cexRow=1.1, cexCol=1.1, 
         margins = c(10, 16))
 
 
