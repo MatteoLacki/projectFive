@@ -55,7 +55,7 @@ for(i in levels(hdata$Age_Group)){
   rownames(hdata2) <- hdata2[,1]
   hdata2[,1] <- NULL
   xh <- as.matrix(hdata2)
-  heatmap(t(-xh), Rowv = NA, Colv = NA, scale = "row", cexRow=1.1, cexCol=1.1,  margins = c(9, 11),  labRow = gsub("_", " ", rownames(t(-xh))), labCol = c('single','married','widowed','divorced or\n separated '))
+  heatmap(t(-xh), Rowv = NA, Colv = NA, scale = "row", cexRow=1.1, cexCol=1.1,  margins = c(9, 11),  labRow = gsub("_", " ", rownames(t(-xh))), ylab = 'smoker group', xlab = 'marital status', labCol = c('single','married','widowed','divorced or\n separated '))
   dev.off()
 } 
 
