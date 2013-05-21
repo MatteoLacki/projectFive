@@ -77,9 +77,14 @@ for (i in 2:length(b_income2)-1) {
     Smoking[i,j] <- mean(m[i-1:i+1,j-1:j+1],na.rm=T)
   }
 }
-colorlut <- terrain.colors(5)
-col <- colorlut[Smoking]
-persp3d(b_age2,b_income2,Smoking,color=col, texture="picts/surfTexture1.png",box=F,xlab="",ylab="",zlab="",specular="black")
-text3d(15,4000,3,"Smoking",adj=0)
-text3d(50,4000,5.2,"Age",adj=0)
-text3d(90,2200,5.4,"Income")
+colorlut <- heat.colors(6)
+col <- colorlut[floor(Smoking)+1]
+#texture="picts/surfTexture1.png"
+persp3d(b_age2,b_income2,Smoking,color=col,box=T,xlab="",ylab="",zlab="",specular="black")
+text3d(20,4000,2.3,"Smoking",adj=0.4)
+text3d(50,4000,5.3,"Age",adj=0.2)
+text3d(90,2200,5.3,"Income",adj=-0.5)
+segments3d(rep(c(15,95,95,95),5),rep(c(3950,3950,3950,0),5),sapply(1:5,function(x) { c(x,x,x,x)}),alpha=0.5,add=T)
+segments3d(c(20,20,40,40,60,60,80,80),rep(c(3950,3950),4),rep(c(5,1),4),alpha=0.5,add=T)
+segments3d(rep(95,4), c(0,0,1000,1000,2000,2000,3000,3000),rep(c(5,1),4),alpha=0.5,add=T)
+spheres3d(rep(15,5),rep(3950,5),1:5,col=colorlut, radius=50,add=T)
