@@ -4,9 +4,9 @@ library(plyr)
 attach(Data)
 
 
+Data<- Data[Data$Income < 10000,]
 
-
-qplot(Income, ..density.., data=Data, geom="density", fill=Smoker_Group, position="stack") +
+qplot(Income, ..density.., data=Data2, geom="density", fill=Smoker_Group, position="stack") +
    coord_flip()
 
 
