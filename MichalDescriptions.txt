@@ -1,0 +1,49 @@
+# Histogram 3D
+
+The third dimension of this beautifully rendered and multilayered
+histogram really gives us the opportunity to look deeper into the
+cigarette addiction of our society. Each bar representing a different
+segment of employment/education is a visual manifestation of a cigarette, the
+darker, burned part of which translates to the current smokers, while the
+filter is appropriately related to those who never smoked. 
+
+## Employment
+
+At least half of
+each group - except for pupils and students, which are a positive
+exception - claimed to have smoked 
+at one point in their life. Particularly many smokers are found among
+the unemployed and in the private sector and also in those groups
+people seem to have a hard time quitting. On the other hand, among the
+retirees - which are the largest group on this chart - those who
+claimed to have smoked were two times more likely to quit than to have
+persisted in this habit. 
+
+## Education
+
+The most smokers can be found in the group of people with technical
+education. The most smoke-free group is also the smallest and the most
+educated one. That is the people with beyond secondary and university
+education. The people with least education - primary or less - also
+have a lot of smokers among themselves. It is interesting to note the
+correlation between the level of one's education and the ability to
+quit smoking. 
+
+
+# Surface 3D
+
+This colorfully stunning surface graph represents how age and wealth
+influence smoking. There were very few people with income above 4000
+PLN, so the results were capped there for better clarity. Smoking is
+represented as the height of the points of the surface, with a scale
+of 1 to 5, which approximates the average number of daily
+cigarettes smoked by the respondents. For better readability, this
+third dimension is also represented as the color on the surface, going
+from red to yellow, as indicated on the axis. The most notable
+correlation is with income. People with income around 2000 PLN seem to
+be smoking the most, and from there it decreases in both
+directions. For age there is less influence except for the people with
+low income. In this group, young people under 30 smoke much less than
+those in their 40s, 50s and above. However, for all incomes there is a
+little bump in smoking for people in their late 20s and people in
+their 60s.
