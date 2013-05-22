@@ -41,6 +41,8 @@ Poisson_Model 		<- glm( formula	= formula,
 				family	= poisson, 
 				contrasts = contrasts )
 
+formula2    <- Daily_Smokes ~ Psychiatric + Alcohol + Drugs + Criminal + Marital_Status + Employment + Age + Education + Gender
+
 Zero_Inflated_Model	<- zeroinfl(
 				formula = formula2, 
 				data 	= na.omit(dataForModelling), 
@@ -51,7 +53,7 @@ Zero_Inflated_Model	<- zeroinfl(
 summary(Zero_Inflated_Model)
 
 	# When included income it gets a singularity error.
-formula2	  <- Daily_Smokes ~ Psychiatric + Alcohol + Drugs + Criminal + Marital_Status + Employment + Age + Education + Gender
+
 
 Hurdle_Model		<- hurdle(
 				formula = formula2, 
@@ -86,9 +88,10 @@ generatingTheoreticalDistributionValues <- function( lambda, upperlimit )
 	return( sapply(0:upperlimit, function(x) PoissonProbabilityFunction(x, lambda) ) )
 }
 
-
 Poisson_Big_Summary 	<- summary( Poisson_Model )
 modelCoefficients 	<- Poisson_Big_Summary$coefficients[,1]
+
+Poisson_Big_Summary
 
 individualLambdasPoisson <- as.data.frame(Poisson_Model$fitted.values)
 names(individualLambdasPoisson) <- 'fitted'
@@ -98,8 +101,9 @@ goodData <- cbind(na.omit(dataForModelling), individualLambdasPoisson)
 
 
 source("./scripts/funkyGorilla.R")
-#p <- funkyGorilla(Drugs='yes', Alcohol='yes')
-#p
+summary(dataForModelling)
+p <- funkyGorilla(Drugs='yes', Alcohol='yes')
+
 
 ############################################################################################################
 
@@ -172,14 +176,14 @@ attach(coefAnalysis)
 M1 <- coefAnalysis[Discrete_Variables=='Psychiatric',1:2]
 
 
-t1 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Psychiatric',1:2], geom="bar", stat="identity") + ylim(-1, 1) + labs(x='',y='Marginal Effect')+ opts(axis.text.x=theme_text(angle=90))
-t2 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Alcohol',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='')+ opts(axis.text.x=theme_text(angle=90))
-t3 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Drugs',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='')+ opts(axis.text.x=theme_text(angle=90))
-t4 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Criminal',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='')+ opts(axis.text.x=theme_text(angle=90))
-t5 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Marital_Status',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='Marginal Effect')+ opts(axis.text.x=theme_text(angle=90))
-t6 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Employment',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='')+ opts(axis.text.x=theme_text(angle=90))
-t7 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Education',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='')+ opts(axis.text.x=theme_text(angle=90))
-t8 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Gender',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='')+ opts(axis.text.x=theme_text(angle=90))
+t1 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Psychiatric',1:2], geom="bar", stat="identity") + ylim(-1, 1) + labs(x='',y='Marginal Effect',title = "Psychiatric")+ opts(axis.text.x=theme_text(angle=90))
+t2 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Alcohol',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Alcohol")+ opts(axis.text.x=theme_text(angle=90))
+t3 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Drugs',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='',title = "Drugs")+ opts(axis.text.x=theme_text(angle=90))
+t4 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Criminal',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Criminal")+ opts(axis.text.x=theme_text(angle=90))
+t5 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Marital_Status',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='Marginal Effect',title = "Marital Status")+ opts(axis.text.x=theme_text(angle=90))
+t6 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Employment',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Employment")+ opts(axis.text.x=theme_text(angle=90))
+t7 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Education',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Education")+ opts(axis.text.x=theme_text(angle=90))
+t8 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Gender',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Gender")+ opts(axis.text.x=theme_text(angle=90))
 
 
 vp.setup(2,4)
