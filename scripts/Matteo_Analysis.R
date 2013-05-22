@@ -176,14 +176,14 @@ attach(coefAnalysis)
 M1 <- coefAnalysis[Discrete_Variables=='Psychiatric',1:2]
 
 
-t1 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Psychiatric',1:2], geom="bar", stat="identity") + ylim(-1, 1) + labs(x='',y='Marginal Effect',title = "Psychiatric")+ opts(axis.text.x=theme_text(angle=90))
-t2 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Alcohol',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Alcohol")+ opts(axis.text.x=theme_text(angle=90))
-t3 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Drugs',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='',title = "Drugs")+ opts(axis.text.x=theme_text(angle=90))
-t4 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Criminal',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Criminal")+ opts(axis.text.x=theme_text(angle=90))
-t5 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Marital_Status',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='Marginal Effect',title = "Marital Status")+ opts(axis.text.x=theme_text(angle=90))
-t6 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Employment',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Employment")+ opts(axis.text.x=theme_text(angle=90))
-t7 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Education',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Education")+ opts(axis.text.x=theme_text(angle=90))
-t8 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Gender',1:2], geom="bar") + ylim(-1, 1) + labs(x='',y='', title = "Gender")+ opts(axis.text.x=theme_text(angle=90))
+t1 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Psychiatric',1:2], geom="bar",fill=I(100), stat="identity") + ylim(-1, 1) + labs(x='',y='Marginal Effect',title = "Psychiatric")+ opts(axis.text.x=theme_text(angle=90))
+t2 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Alcohol',1:2], geom="bar",fill=I(100)) + ylim(-1, 1) + labs(x='',y='', title = "Alcohol")+ opts(axis.text.x=theme_text(angle=90))
+t3 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Drugs',1:2], geom="bar",fill=I(100)) + ylim(-1, 1) + labs(x='',y='',title = "Drugs")+ opts(axis.text.x=theme_text(angle=90))
+t4 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Criminal',1:2], geom="bar",fill=I(100)) + ylim(-1, 1) + labs(x='',y='', title = "Criminal")+ opts(axis.text.x=theme_text(angle=90))
+t5 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Marital_Status',1:2], geom="bar",fill=I(100)) + ylim(-1, 1) + labs(x='',y='Marginal Effect',title = "Marital Status")+ opts(axis.text.x=theme_text(angle=90))
+t6 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Employment',1:2], geom="bar",fill=I(100)) + ylim(-1, 1) + labs(x='',y='', title = "Employment")+ opts(axis.text.x=theme_text(angle=90))
+t7 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Education',1:2], geom="bar",fill=I(100)) + ylim(-1, 1) + labs(x='',y='', title = "Education")+ opts(axis.text.x=theme_text(angle=90))
+t8 <- qplot(Response, Marginal_Effect, data=coefAnalysis[Discrete_Variables=='Gender',1:2], geom="bar",fill=I(100)) + ylim(-1, 1) + labs(x='',y='', title = "Gender")+ opts(axis.text.x=theme_text(angle=90))
 
 
 vp.setup(2,4)
@@ -202,5 +202,3 @@ detach(coefAnalysis)
 rm( Relative_Binary_Change )
 rm( Poisson_Model )
 rm(contrasts, dataForModelling, variables, variablesForModelling)
-
-
