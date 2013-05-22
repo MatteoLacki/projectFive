@@ -4,7 +4,7 @@ The third dimension of this beautifully rendered and multilayered
 histogram really gives us the opportunity to look deeper into the
 cigarette addiction of our society. Each bar representing a different
 segment of employment/education is a visual manifestation of a cigarette, the
-darker, burned part of which translates the current smokers, while the
+darker, burned part of which translates to the current smokers, while the
 filter is appropriately related to those who never smoked. 
 
 ## Employment
