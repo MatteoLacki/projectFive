@@ -1,8 +1,8 @@
 library(ggplot2)
 library(plyr)
+library(lattice)
 
-
-
+load("data/Data.RData")
 attach(Data)
 
 
@@ -36,23 +36,31 @@ tp2 <- densityplot(~ Daily_Smokes, data = Data_temp[Data_temp$Daily_Smokes > 0, 
                    plot.points = FALSE,
                    type = c("g"),
                    pch  = 10,
+                   lwd= 4,
                    auto.key = list(space = "right", title = "Gender"))
-class(tp2)
+
 plot(tp2, split = c(1, 1, 1, 1), newpage = TRUE)
 
+png(file = 'picts/TatianaDistributions.png', width=800, height=500)
+plot(tp2, split = c(1, 1, 1, 1), newpage = TRUE)
+dev.off()
 
 
 
 
-
-qplot(Income, ..density.., data=Data_temp[Data_temp$Income < 10000,], geom="density", fill=Smoker_Group, position="stack") +
+ggsdfg <- qplot(Income, ..density.., data=Data_temp[Data_temp$Income < 10000,], geom="density", fill=Smoker_Group, position="stack") +
   scale_fill_brewer(palette=6, name="Smoking level") 
 
 
+ggsdfg
+
+png(file = 'picts/TatianaDistributionsSmokingLevel.png', width=800, height=500)
+print(ggsdfg)
+dev.off()
 
 
-qplot(Income, ..density.., data=Data_temp[Data_temp$Income < 10000,], geom="density", aes(depth), fill=Smoker_Group, position="stack") +
-  coord_flip() 
+qplot(Income, ..density.., data=Data_temp[Data_temp$Income < 10000,], geom="density", aes(depth), fill=Smoker_Group, position="stack")
+   
   
 
 
